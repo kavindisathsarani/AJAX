@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+   "items":[
+     {
+       "itemcode": "23",
+       "qty": "4"
+     },
+     {
+       "itemcode": "24",
+       "qty": "5"
+     }
+   ],
+
+    "name": "saman",
+    "address": "galle",
+    "number": "0777876576"
+  },
+  {
+    "id": 2,
+    "name": "saman",
+    "address": "galle",
+    "number": "1"
+  }
+]

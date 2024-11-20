@@ -3,34 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <title>ajax</title>
+
+    <style>
+
+        table,th,tr,td{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
 <h1>This is a example project for ajax</h1>
 <p id="para">sample paragraph</p>
 <button id="ajax-button">Send a ajax request</button>
+<img id="dynamic-img" width="100px">
+
+<section>
+    <h3 id="userId"></h3>
+    <h3 id="id"></h3>
+    <h3 id="title"></h3>
+    <h3 id="body"></h3>
+</section>
+
+<table>
+   <tr>
+       <th>id</th>
+       <th>title</th>
+       <th>body</th>
+   </tr>
+<tr>
+    <td class="id"></td>
+    <td class="title"></td>
+    <td class="body"></td>
+</tr>
+</table>
+
 <script src="js/jquery-3.7.1.min.js"></script>
 <script>
 
     $("#ajax-button").click(function() {
         // console.log("Button clicked");
         console.log("Request Started!");
-        var http=new XMLHttpRequest();
-        console.log(http.readyState,"After the XMLHttpRequest Object created");
-        http.open('GET','db/db.txt');
-        console.log(http.readyState,"After the open method invoke");
-        console.log(http.responseText);
-        console.log(http.readyState,"after the response text printed");
-        http.send();
-        console.log(http.readyState,"after the send method invoked");
-        console.log("Request finished");
-        http.onreadystatechange=function () {
+
+        $.ajax({
+            // url:"https://jsonplaceholder.typicode.com/posts",
+            // url:"db/db.txt",
+            url:"https://jsonplaceholder.typicode.com/posts/1",
+
+            //to synchronize this
+            async:false,
+            success:function (response) {
+                //This is a sample database
+                // console.log(response.userId)
+                console.log(response.id)
+                console.log(response.title)
+                console.log(response.body)
+
+
+
+                $('.id').text(response.id);
+                $('.title').text(response.title);
+                $('.body').text(response.body);
+            },
+            error:function (error) {
+                console.log('error')
+                console.log(error)
+            }
+        })
+
+        console.log("request finished");
+        // var http=new XMLHttpRequest();
+        // console.log(http.readyState,"After the XMLHttpRequest Object created");
+        // http.open('GET','db/db.txt',false);
+        // http.open('GET','images/pexels-gapeppy1-2373201.jpg')
+        // console.log(http.readyState,"After the open method invoke");
+        // console.log(http.responseText);
+        // console.log(http.readyState,"after the response text printed");
+        // http.send();
+        // console.log(http.readyState,"after the send method invoked");
+        // console.log("Request finished");
+
+        // http.onreadystatechange=function () {
             // console.log("test");
-            console.log(http.readyState,"Inside on ready state change event");
-            console.log(http.responseText);
-        }
+            // console.log(http.readyState,"Inside on ready state change event");
+            // console.log(http.responseText);
 
-    });
+            //when the button clicked the paragraph of db.txt will display instead of
+            //sample paragraph.the paragraph with id,para will get replaced
 
+            // if(http.status==200 && http.readyState===4){
+            //     $('#para').text(http.responseText);
+            // }
+
+            // if(http.status==200 && http.readyState===4){
+            //     $('#dynamic-img').attr('src','images/pexels-gapeppy1-2373201.jpg').show();
+            // }
+
+
+    //         console.log(http.readyState);
+    //         console.log(http.status);
+    //         console.log(http.responseText);
+    //
+    //
+    //     }
+    //     console.log("request finished");
+
+     });
+
+</script>
+
+<script>
+    //synchronous
+    // console.log("1")
+    // console.log("2")
+    // console.log("3")
+
+    //asynchronous
+    // console.log("start")
+    // setTimeout(()=>{
+    //     console.log("middle-1")
+    // },2000)
+    //
+    // setTimeout(()=>{
+    //     console.log("middle-2")
+    // },1000)
+    //
+    // console.log("end")
 </script>
 </body>
 </html>
